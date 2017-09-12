@@ -712,23 +712,7 @@
                         ]
                     ]
                 },
-                "ImageId": {
-                    "Fn::FindInMap": [
-                        "AWSAMIRegionMap",
-                        {
-                            "Ref": "AWS::Region"
-                        },
-                        {
-                            "Fn::FindInMap": [
-                                "LinuxAMINameMap",
-                                {
-                                    "Ref": "LinuxOSAMI"
-                                },
-                                "Code"
-                            ]
-                        }
-                    ]
-                },
+                "ImageId": {"ref": "MmBaseAmiId"},
                 "SecurityGroups": {
                     "Ref": "NodeSecurityGroup"
                 },
