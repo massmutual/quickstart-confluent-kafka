@@ -337,78 +337,7 @@
                 },
                 "DesiredCapacity": {
                     "Ref": "NumNodes"
-                },
-                "Tags": [{
-                        "PropagateAtLaunch": true,
-                        "Value": {
-                            "Ref": "MmTagsApplication"
-                        },
-                        "Key": "Name"
-                    },
-                    {
-                        "PropagateAtLaunch": true,
-                        "Value": {
-                            "Ref": "MmTagsEnvironment"
-                        },
-                        "Key": "environment"
-                    },
-                    {
-                        "PropagateAtLaunch": true,
-                        "Value": {
-                            "Ref": "MmTagsCostCenter"
-                        },
-                        "Key": "costcenter"
-                    },
-                    {
-                        "PropagateAtLaunch": true,
-                        "Value": {
-                            "Ref": "MmTagsOwner"
-                        },
-                        "Key": "owner"
-                    },
-                    {
-                        "PropagateAtLaunch": true,
-                        "Value": {
-                            "Ref": "MmTagsStack"
-                        },
-                        "Key": "stack"
-                    },
-                    {
-                        "PropagateAtLaunch": true,
-                        "Value": {
-                            "Ref": "MmTagsApplication"
-                        },
-                        "Key": "application"
-                    },
-                    {
-                        "PropagateAtLaunch": true,
-                        "Value": {
-                            "Ref": "MmTagsGroup"
-                        },
-                        "Key": "group"
-                    },
-                    {
-                        "PropagateAtLaunch": true,
-                        "Value": {
-                            "Ref": "MmTagsRole"
-                        },
-                        "Key": "role"
-                    },
-                    {
-                        "PropagateAtLaunch": true,
-                        "Value": {
-                            "Ref": "MmTagsTCode"
-                        },
-                        "Key": "tcode"
-                    },
-                    {
-                        "PropagateAtLaunch": true,
-                        "Value": {
-                            "Ref": "MmTagsAppId"
-                        },
-                        "Key": "appid"
-                    }
-                ]
+                }
             },
             "CreationPolicy": {
                 "ResourceSignal": {

@@ -642,43 +642,6 @@
                                 "Ref": "SubnetID"
                             }
                         ]
-                    },
-                    "MmTagsApplication": {
-                        "Type": "String",
-                        "Description": "Internal MM Tag"
-                    },
-                    "MmTagsTCode": {
-                        "Type": "String",
-                        "Description": "Internal MM Tag"
-                    },
-                    "MmTagsOwner": {
-                        "Type": "String",
-                        "Description": "Internal MM Tag"
-                    },
-                    "MmTagsGroup": {
-                        "Type": "String",
-                        "Description": "Internal MM Tag"
-                    },
-                    "MmTagsCostCenter": {
-                        "Type": "String",
-                        "Description": "Internal MM Tag"
-                    },
-                    "MmTagsRole": {
-                        "Type": "String",
-                        "Description": "Internal MM Tag"
-                    },
-                    "MmTagsEnvironment": {
-                        "Type": "String",
-                        "Description": "Internal MM Tag"
-                    },
-                    "MmTagsStack": {
-                        "Type": "String",
-                        "Description": "Internal MM Tag"
-                    },
-
-                    "MmTagsAppId": {
-                        "Type": "String",
-                        "Description": "Internal MM Tag"
                     }
                 }
             }
@@ -876,43 +839,6 @@
                                 "Ref": "SubnetID"
                             }
                         ]
-                    },
-                    "MmTagsApplication": {
-                        "Type": "String",
-                        "Description": "Internal MM Tag"
-                    },
-                    "MmTagsTCode": {
-                        "Type": "String",
-                        "Description": "Internal MM Tag"
-                    },
-                    "MmTagsOwner": {
-                        "Type": "String",
-                        "Description": "Internal MM Tag"
-                    },
-                    "MmTagsGroup": {
-                        "Type": "String",
-                        "Description": "Internal MM Tag"
-                    },
-                    "MmTagsCostCenter": {
-                        "Type": "String",
-                        "Description": "Internal MM Tag"
-                    },
-                    "MmTagsRole": {
-                        "Type": "String",
-                        "Description": "Internal MM Tag"
-                    },
-                    "MmTagsEnvironment": {
-                        "Type": "String",
-                        "Description": "Internal MM Tag"
-                    },
-                    "MmTagsStack": {
-                        "Type": "String",
-                        "Description": "Internal MM Tag"
-                    },
-
-                    "MmTagsAppId": {
-                        "Type": "String",
-                        "Description": "Internal MM Tag"
                     }
                 }
             }
