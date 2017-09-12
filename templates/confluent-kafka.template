@@ -10,9 +10,7 @@
                     },
                     "Parameters": [
                         "VPCID",
-                        "SubnetID",
-                        "RemoteAccessCIDR",
-                        "SSHAccessCIDR"
+                        "SubnetID"
                     ]
                 },
                 {
@@ -132,12 +130,6 @@
                 },
                 "QSS3KeyPrefix": {
                     "default": "Quick Start S3 Key Prefix"
-                },
-                "RemoteAccessCIDR": {
-                    "default": "Allowed External Access CIDR"
-                },
-                "SSHAccessCIDR": {
-                    "default": "Allowed SSH Access CIDR"
                 },
                 "SubnetID": {
                     "default": "Subnet ID"
@@ -318,18 +310,6 @@
             "ConstraintDescription": "Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).",
             "Default": "confluent/kafka/latest/",
             "Description": "S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).",
-            "Type": "String"
-        },
-        "RemoteAccessCIDR": {
-            "AllowedPattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/([0-9]|[1-2][0-9]|3[0-2]))$",
-            "ConstraintDescription": "CIDR block parameter must be in the form x.x.x.x/x",
-            "Description": "Allowed CIDR block for external access to cluster nodes",
-            "Type": "String"
-        },
-        "SSHAccessCIDR": {
-            "AllowedPattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/([0-9]|[1-2][0-9]|3[0-2]))$",
-            "ConstraintDescription": "CIDR block parameter must be in the form x.x.x.x/x",
-            "Description": "Allowed CIDR block for SSH access to cluster nodes",
             "Type": "String"
         },
         "SubnetID": {
@@ -766,24 +746,7 @@
                     "Ref": "VPCID"
                 },
                 "GroupDescription": "Kafka Brokers Security Group",
-                "SecurityGroupIngress": [
-                    {
-                        "IpProtocol": "tcp",
-                        "FromPort": "9092",
-                        "ToPort": "9093",
-                        "CidrIp": {
-                            "Ref": "RemoteAccessCIDR"
-                        }
-                    },
-                    {
-                        "IpProtocol": "tcp",
-                        "FromPort": "22",
-                        "ToPort": "22",
-                        "CidrIp": {
-                            "Ref": "SSHAccessCIDR"
-                        }
-                    }
-                ]
+                "SecurityGroupIngress": []
             }
         },
         "BrokerIngressReplication": {
@@ -823,16 +786,7 @@
                     "Ref": "VPCID"
                 },
                 "GroupDescription": "Zookeeper Security Group",
-                "SecurityGroupIngress": [
-                    {
-                        "IpProtocol": "tcp",
-                        "FromPort": "22",
-                        "ToPort": "22",
-                        "CidrIp": {
-                            "Ref": "SSHAccessCIDR"
-                        }
-                    }
-                ]
+                "SecurityGroupIngress": []
             }
         },
         "ZookeeperIngressTcp2888": {
@@ -937,136 +891,6 @@
                 "ToPort": "2181",
                 "SourceSecurityGroupId": {
                     "Ref": "WorkerSecurityGroup"
-                }
-            }
-        },
-        "ZookeeperRemoteIngress": {
-            "Type": "AWS::EC2::SecurityGroupIngress",
-            "Properties": {
-                "GroupId": {
-                    "Fn::If": [
-                        "IndependentZookeepers",
-                        {
-                            "Ref": "ZookeeperSecurityGroup"
-                        },
-                        {
-                            "Ref": "BrokerSecurityGroup"
-                        }
-                    ]
-                },
-                "IpProtocol": "tcp",
-                "FromPort": "2181",
-                "ToPort": "2181",
-                "CidrIp": {
-                    "Ref": "RemoteAccessCIDR"
-                }
-            }
-        },
-        "WorkerSecurityGroup": {
-            "Type": "AWS::EC2::SecurityGroup",
-            "Condition": "IndependentWorkers",
-            "Properties": {
-                "VpcId": {
-                    "Ref": "VPCID"
-                },
-                "GroupDescription": "Kafka Workers Security Group",
-                "SecurityGroupIngress": [
-                    {
-                        "IpProtocol": "tcp",
-                        "FromPort": "22",
-                        "ToPort": "22",
-                        "CidrIp": {
-                            "Ref": "SSHAccessCIDR"
-                        }
-                    }
-                ]
-            }
-        },
-        "SchemaRegistryRemoteIngress": {
-            "Type": "AWS::EC2::SecurityGroupIngress",
-            "Properties": {
-                "GroupId": {
-                    "Fn::If": [
-                        "IndependentWorkers",
-                        {
-                            "Ref": "WorkerSecurityGroup"
-                        },
-                        {
-                            "Ref": "BrokerSecurityGroup"
-                        }
-                    ]
-                },
-                "IpProtocol": "tcp",
-                "FromPort": "8081",
-                "ToPort": "8081",
-                "CidrIp": {
-                    "Ref": "RemoteAccessCIDR"
-                }
-            }
-        },
-        "RESTProxyRemoteIngress": {
-            "Type": "AWS::EC2::SecurityGroupIngress",
-            "Properties": {
-                "GroupId": {
-                    "Fn::If": [
-                        "IndependentWorkers",
-                        {
-                            "Ref": "WorkerSecurityGroup"
-                        },
-                        {
-                            "Ref": "BrokerSecurityGroup"
-                        }
-                    ]
-                },
-                "IpProtocol": "tcp",
-                "FromPort": "8082",
-                "ToPort": "8082",
-                "CidrIp": {
-                    "Ref": "RemoteAccessCIDR"
-                }
-            }
-        },
-        "KafkaConnectRemoteIngress": {
-            "Type": "AWS::EC2::SecurityGroupIngress",
-            "Properties": {
-                "GroupId": {
-                    "Fn::If": [
-                        "IndependentWorkers",
-                        {
-                            "Ref": "WorkerSecurityGroup"
-                        },
-                        {
-                            "Ref": "BrokerSecurityGroup"
-                        }
-                    ]
-                },
-                "IpProtocol": "tcp",
-                "FromPort": "8083",
-                "ToPort": "8083",
-                "CidrIp": {
-                    "Ref": "RemoteAccessCIDR"
-                }
-            }
-        },
-        "ControlCenterRemoteIngress": {
-            "Type": "AWS::EC2::SecurityGroupIngress",
-            "Properties": {
-                "GroupId": {
-                    "Fn::If": [
-                        "IndependentWorkers",
-                        {
-                            "Ref": "WorkerSecurityGroup"
-                        },
-                        {
-                            "Ref": "BrokerSecurityGroup"
-                        }
-                    ]
-                },
-                "IpProtocol": "tcp",
-                "FromPort": "9021",
-                "ToPort": "9021",
-                "CidrIp": {
-                    "Ref": "RemoteAccessCIDR"
                 }
             }
         },
