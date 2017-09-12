@@ -163,6 +163,10 @@
         }
     },
     "Parameters": {
+        "ExtraSecurityGroups": {
+          "Description": "Comma-delimited IDs of any extra security groups needed",
+          "Type": "String"
+        },
         "MmBaseAmiId": {
           "Description": "ID of the MM base ami",
           "Type": "String"
@@ -607,8 +611,8 @@
                     "NodeSecurityGroup": {
                         "Fn::Join" : [",", [
                         {"Ref" : "BrokerSecurityGroup"},
-                        {"Ref" : "ExtraSecurityGroups"},
-                        ]
+                        {"Ref" : "ExtraSecurityGroups"}
+                        ]]
                     },
                     "NodeSpotPrice": {
                         "Ref": "BrokerNodeSpotPrice"
@@ -727,8 +731,8 @@
                     "NodeSecurityGroup": {
                         "Fn::Join" : [",", [
                         {"Ref" : "ZookeeperSecurityGroup"},
-                        {"Ref" : "ExtraSecurityGroups"},
-                        ]
+                        {"Ref" : "ExtraSecurityGroups"}
+                        ]]
                     },
                     "NodeSpotPrice": {
                         "Ref": "ZookeeperNodeSpotPrice"
@@ -844,8 +848,8 @@
                     "NodeSecurityGroup": {
                         "Fn::Join" : [",", [
                         {"Ref" : "WorkerSecurityGroup"},
-                        {"Ref" : "ExtraSecurityGroups"},
-                        ]
+                        {"Ref" : "ExtraSecurityGroups"}
+                        ]]
                     },
                     "NodeSpotPrice": {
                         "Ref": "WorkerNodeSpotPrice"
@@ -911,6 +915,17 @@
                         "Description": "Internal MM Tag"
                     }
                 }
+            }
+        },
+        "WorkerSecurityGroup": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Condition": "IndependentWorkers",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "VPCID"
+                },
+                "GroupDescription": "Kafka Workers Security Group",
+                "SecurityGroupIngress": []
             }
         },
         "BrokerSecurityGroup": {
