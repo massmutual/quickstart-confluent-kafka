@@ -31,6 +31,7 @@
                     "Parameters": [
                         "KeyPairName",
                         "LinuxOSAMI",
+                        "MmBaseAmiId",
                         "BootDiskSize",
                         "AssignPublicIP"
                     ]
@@ -80,6 +81,9 @@
                 }
             ],
             "ParameterLabels": {
+                "MmBaseAmiId": {
+                  "Description": "ID of the MM base ami"
+                },
                 "AssignPublicIP": {
                     "default": "Allocate a public IP for each instance"
                 },
@@ -159,6 +163,10 @@
         }
     },
     "Parameters": {
+        "MmBaseAmiId": {
+          "Description": "ID of the MM base ami",
+          "Type": "String"
+        },
         "AssignPublicIP": {
             "AllowedValues": [
               "true",
@@ -519,6 +527,9 @@
                     "Fn::Sub": "https://${QSS3BucketName}.s3.amazonaws.com/${QSS3KeyPrefix}templates/nodegroup.template"
                 },
                 "Parameters": {
+                    "MmBaseAmiId": {
+                        "Ref": "MmBaseAmiId"
+                    },
                     "AssignPublicIP": {
                         "Ref": "AssignPublicIP"
                     },
@@ -599,6 +610,9 @@
                     "Fn::Sub": "https://${QSS3BucketName}.s3.amazonaws.com/${QSS3KeyPrefix}templates/nodegroup.template"
                 },
                 "Parameters": {
+                    "MmBaseAmiId": {
+                        "Ref": "MmBaseAmiId"
+                    },
                     "AssignPublicIP": {
                         "Ref": "AssignPublicIP"
                     },
@@ -673,6 +687,9 @@
                     "Fn::Sub": "https://${QSS3BucketName}.s3.amazonaws.com/${QSS3KeyPrefix}templates/nodegroup.template"
                 },
                 "Parameters": {
+                    "MmBaseAmiId": {
+                        "Ref": "MmBaseAmiId"
+                    },
                     "AssignPublicIP": {
                         "Ref": "AssignPublicIP"
                     },

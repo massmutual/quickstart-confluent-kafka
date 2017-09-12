@@ -2,6 +2,10 @@
     "AWSTemplateFormatVersion": "2010-09-09",
     "Description": "CloudFormation sub-template for Auto-scaling group deployment",
     "Parameters": {
+        "MmBaseAmiId": {
+          "Description": "ID of the MM base ami",
+          "Type": "String"
+        },
         "AssignPublicIP": {
             "AllowedValues": [
                 "true",
@@ -36,7 +40,7 @@
                 "Confluent Open Source",
                 "Confluent Enterprise"
             ],
-            "Default": "Confluent Enterprise",
+            "Default": "Confluent Open Source",
             "Description": "Confluent Software Edition",
             "Type": "String"
         },
@@ -233,7 +237,7 @@
                 "US1604HVM": "ami-a41869c8"
             },
             "us-east-1": {
-                "AMZNLINUXHVM": "ami-4fffc834",
+                "AMZNLINUXHVM": {"ref": "MmBaseAmiId"},
                 "CENTOS7HVM": "ami-46c1b650",
                 "US1604HVM": "ami-1d4e7a66"
             },
