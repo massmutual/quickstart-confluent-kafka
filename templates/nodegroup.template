@@ -641,7 +641,7 @@
                         ]
                     ]
                 },
-                "ImageId": {"ref": "MmBaseAmiId"},
+                "ImageId": {"Ref": "MmBaseAmiId"},
                 "SecurityGroups": {
                     "Ref": "NodeSecurityGroup"
                 },
