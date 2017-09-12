@@ -605,7 +605,10 @@
                         "Ref": "BrokerNodeInstanceType"
                     },
                     "NodeSecurityGroup": {
-                        "Ref" : "BrokerSecurityGroup"
+                        "Fn::Join" : [",", [
+                        {"Ref" : "BrokerSecurityGroup"},
+                        {"Ref" : "ExtraSecurityGroups"},
+                        ]
                     },
                     "NodeSpotPrice": {
                         "Ref": "BrokerNodeSpotPrice"
@@ -722,7 +725,10 @@
                         "Ref": "ZookeeperNodeInstanceType"
                     },
                     "NodeSecurityGroup": {
-                        "Ref" : "ZookeeperSecurityGroup"
+                        "Fn::Join" : [",", [
+                        {"Ref" : "ZookeeperSecurityGroup"},
+                        {"Ref" : "ExtraSecurityGroups"},
+                        ]
                     },
                     "NodeSpotPrice": {
                         "Ref": "ZookeeperNodeSpotPrice"
@@ -836,7 +842,10 @@
                         "Ref": "WorkerNodeInstanceType"
                     },
                     "NodeSecurityGroup": {
-                        "Ref" : "WorkerSecurityGroup"
+                        "Fn::Join" : [",", [
+                        {"Ref" : "WorkerSecurityGroup"},
+                        {"Ref" : "ExtraSecurityGroups"},
+                        ]
                     },
                     "NodeSpotPrice": {
                         "Ref": "WorkerNodeSpotPrice"

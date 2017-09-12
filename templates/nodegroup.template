@@ -237,7 +237,7 @@
                 "US1604HVM": "ami-a41869c8"
             },
             "us-east-1": {
-                "AMZNLINUXHVM": {"ref": "MmBaseAmiId"},
+                "AMZNLINUXHVM": "foo",
                 "CENTOS7HVM": "ami-46c1b650",
                 "US1604HVM": "ami-1d4e7a66"
             },
